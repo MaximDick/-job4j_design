@@ -1,7 +1,7 @@
 # используем язык java. Travis CI поддерживает другие языки тоже.
 language: java
 jdk:
- - openjdk11
+ - openjdk13
 
 # используем режим обычного пользователя для сборки проекта.
 sudo: false
@@ -22,4 +22,5 @@ notifications:
 
     env:
       global:
-        - CODECOV_TOKEN="4641a85f-fd5c-4e8f-8750-6255d455d8be"
+        - CODECOV_TOKEN="8f28131e-1305-4b8a-b8ed-da25c26720e8"
+

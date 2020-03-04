@@ -32,32 +32,4 @@ public class SimpleGenerator implements Template {
         }
         return template;
     }
-
-//    private final Pattern pattern = Pattern.compile("\\$\\{.+?\\}");
-//
-//    /**
-//     * Method search ${} and replace from collections map
-//     * @param template
-//     * @param data
-//     * @return
-//     */
-//    @Override
-//    public String generate(String template, Map<String, String> data) {
-//        Matcher matcher = pattern.matcher(template);
-//        while (matcher.find()) {
-//            String key = matcher.group();
-//            if (!data.containsKey(key)) {
-//                try {
-//                    throw new Exception("Map does't contain that key");
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//            if (!data.get(matcher.group()).equals(key)) {
-//                new RuntimeException("Unnecessary Param ");
-//            }
-//            template = template.replaceFirst(pattern.pattern(), data.get(matcher.group()));
-//        }
-//        return template;
-//    }
 }

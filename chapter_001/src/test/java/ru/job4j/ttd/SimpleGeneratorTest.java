@@ -2,6 +2,8 @@ package ru.job4j.ttd;
 
 import org.junit.Assert;
 import org.junit.Test;
+import ru.job4j.ttd.SimpleGenerator;
+import ru.job4j.ttd.Template;
 
 
 import java.util.HashMap;

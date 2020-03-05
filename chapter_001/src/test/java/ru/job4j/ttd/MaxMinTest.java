@@ -1,6 +1,7 @@
 package ru.job4j.ttd;
 
 import org.junit.Test;
+import ru.job4j.ttd.MaxMin;
 
 import java.util.ArrayList;
 import java.util.Comparator;

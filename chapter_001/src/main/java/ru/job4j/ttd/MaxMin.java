@@ -14,9 +14,7 @@ public class MaxMin {
 
     private <T> T find(List<T> values, BiPredicate<T, T> select) {
         T result = null;
-        if (values == null || values.isEmpty()) {
-            throw new IllegalArgumentException("empty list");
-        }
+
         for (int idx = 0; idx < values.size() - 1; idx++) {
             if (select.test(values.get(idx), values.get(idx + 1))) {
                 result = values.get(idx);

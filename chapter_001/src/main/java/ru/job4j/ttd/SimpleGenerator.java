@@ -18,13 +18,13 @@ public class SimpleGenerator implements Template {
         Matcher matcher = KEYS.matcher(template);
         while (matcher.find()) {
             String key = matcher.group();
-            if (!data.containsKey(key)) {
-                try {
-                    throw new Exception("Map does't contain that keys");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
+//            if (!data.containsKey(key)) {
+//                try {
+//                    throw new Exception("Map does't contain that keys");
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
             if (!data.get(matcher.group()).equals(key)) {
                     new RuntimeException("invalid parameters");
             }

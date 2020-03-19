@@ -2,6 +2,7 @@ package ru.job4j.iterator;
 
 import org.junit.Before;
 import org.junit.Test;
+import ru.job4j.iterator.Converter;
 
 import java.util.ArrayList;
 import java.util.Arrays;

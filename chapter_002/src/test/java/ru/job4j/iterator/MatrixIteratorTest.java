@@ -2,6 +2,7 @@ package ru.job4j.iterator;
 
 import org.junit.Before;
 import org.junit.Test;
+import ru.job4j.iterator.MatrixIterator;
 
 import java.util.Iterator;
 

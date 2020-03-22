@@ -24,13 +24,15 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public void add(T model) {
+        if (this.position >= array.length) {
+            throw new NullPointerException("The array is full.");
+        }
         this.array[position++] = model;
     }
 
-    public int set(int position, T model) {
+    public void set(int position, T model) {
         checkIndexPosition(position);
-        array[position] = model;
-        return position;
+        this.array[position] = model;
     }
 
     public void remove(int index) {

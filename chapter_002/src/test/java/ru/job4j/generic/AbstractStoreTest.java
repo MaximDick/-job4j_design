@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 public class AbstractStoreTest {
 
     @Test
-    public void whenAddSomeUsersthenReplaceOneThenDelete() {
+    public void whenAddSomeUsersThenReplaceOneThenDelete() {
         UserStore userStore = new UserStore(5);
         User user1 = new User("E95");
         User user2 = new User("Y15");

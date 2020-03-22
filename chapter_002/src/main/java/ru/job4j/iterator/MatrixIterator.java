@@ -1,7 +1,6 @@
 package ru.job4j.iterator;
 
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 public class MatrixIterator<T> implements Iterator<T> {
 
@@ -31,14 +30,12 @@ public class MatrixIterator<T> implements Iterator<T> {
 
     @Override
     public T next() {
-        if (position >= size) { //если перебрали все элементы, то бросить исключение
-            throw new NoSuchElementException();
-        }
-        T element = matrix[row][col];  //запоминаем текущий элемент
-        //переходим к следующему элементу
+
+//      переходим к следующему элементу
         position++;
-        col++;
-        while (row < matrix.length && col >= matrix[row].length) { //для того, чтоб пропустить возможные "пустые" строки
+
+        T element = matrix[row][col++];
+        if (col >= matrix[row].length) {
             col = 0;
             row++;
         }

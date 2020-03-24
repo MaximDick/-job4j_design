@@ -15,7 +15,7 @@ public class DynamicListArrayBasedTest {
      * */
     @Test
     public void ifAddIntegerToTestListThenHasThisInteger() {
-        DynamicListArrayBased<Integer> list = new DynamicListArrayBased<>();
+        SimpleList<Integer> list = new DynamicListArrayBased<>();
         list.add(10);
         list.add(5);
         list.add(22);
@@ -29,7 +29,7 @@ public class DynamicListArrayBasedTest {
      * */
     @Test
     public void hasNextNextSequentialInvocation() {
-        DynamicListArrayBased<Integer> list = new DynamicListArrayBased<>();
+        SimpleList<Integer> list = new DynamicListArrayBased<>();
         list.add(1);
         list.add(9);
         list.add(12);
@@ -48,7 +48,7 @@ public class DynamicListArrayBasedTest {
      * */
     @Test(expected = ConcurrentModificationException.class)
     public void ifCollectionWasModificationThenThrowConcurrentModificationException() {
-        DynamicListArrayBased list = new DynamicListArrayBased();
+        SimpleList list = new DynamicListArrayBased();
         Iterator<Integer> iterator = list.iterator();
         list.add(22);
         iterator.next();

@@ -1,7 +1,5 @@
 package ru.job4j.list;
 
-import org.w3c.dom.Node;
-
 public class SimpleArrayList<E> {
     private int size;
     private Node<E> first;

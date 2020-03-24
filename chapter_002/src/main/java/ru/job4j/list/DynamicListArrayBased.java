@@ -54,7 +54,7 @@ public class DynamicListArrayBased<E> implements SimpleList<E> {
     }
 
     /**
-     * ДОбавление элемента.
+     * Добавление элемента.
      * @param value
      * */
     @Override
@@ -75,7 +75,7 @@ public class DynamicListArrayBased<E> implements SimpleList<E> {
     }
 
     /**
-     *@return Итератор для обхода структуры.
+     * @return Итератор для обхода структуры.
      * */
     @Override
     public Iterator<E> iterator() {

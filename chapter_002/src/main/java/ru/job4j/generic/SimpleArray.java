@@ -5,59 +5,68 @@ import java.util.NoSuchElementException;
 
 public class SimpleArray<T> implements Iterable<T> {
 
-    private Object[] array;
-    private int position;
+    private T[] array;
+    private int size;
+
+//   public SimpleArray(T[] model) {
+//       this.array = (T[]) new Object[size];
+//   }
 
     public SimpleArray(int size) {
-        this.array = new Object[size];
-        this.position = 0;
+        this.array = (T[]) new Object[size];
+        this.size = 0;
     }
 
     public SimpleArray() {
-        array = new Object[10];
+        array = (T[]) new Object[10];
     }
 
-    public void checkIndexPosition(int position) {
-        if (array.length < position) {
+    public void checkIndexPosition(int indx) {
+        if (size == 0 || indx < 0 || indx >= size) {
             throw new ArrayIndexOutOfBoundsException();
         }
     }
 
     public void add(T model) {
-        if (this.position >= array.length) {
+        if (this.size >= array.length) {
             throw new NullPointerException("The array is full.");
         }
-        this.array[position++] = model;
+        this.array[size++] = model;
     }
 
-    public void set(int position, T model) {
-        checkIndexPosition(position);
-        this.array[position] = model;
+    public void set(int index, T model) {
+//        if (size == 0 || index < 0 || index >= size) {
+//            throw new ArrayIndexOutOfBoundsException();
+//        }
+        checkIndexPosition(index);
+        this.array[index] = model;
     }
 
     public void remove(int index) {
-        if (index > position) {
-            throw new ArrayIndexOutOfBoundsException();
-        }
-        this.array[position--] = null;
-        System.arraycopy(array, position + 1, array, position, array.length - position - 1);
+//        if (size == 0 || index < 0 || index >= size) {
+//            throw new ArrayIndexOutOfBoundsException();
+//        }
+        checkIndexPosition(index);
+        this.array[size--] = null;
+        System.arraycopy(array, size + 1, array, size, array.length - size - 1);
     }
 
     public T get(int index) {
-        if (index >= position) {
-            throw new ArrayIndexOutOfBoundsException();
-        }
-        return (T) this.array[index];
+//        if (size == 0 || index < 0 || index >= size) {
+//            throw new ArrayIndexOutOfBoundsException();
+//        }
+        checkIndexPosition(index);
+        return this.array[index];
     }
 
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
-            private int index = 0;
+            private int pos = 0;
 
             @Override
             public boolean hasNext() {
-                return index < position;
+                return pos < size;
             }
 
             @Override
@@ -65,7 +74,7 @@ public class SimpleArray<T> implements Iterable<T> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return (T) array[index++];
+                return array[pos++];
             }
         };
     }

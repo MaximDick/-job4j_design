@@ -22,7 +22,7 @@ public class SimpleArrayList<E> {
     public E delete() {
         Node temp = first;
         first = first.next;
-        return (E) first;
+        return (E) temp;
     }
 
     /**

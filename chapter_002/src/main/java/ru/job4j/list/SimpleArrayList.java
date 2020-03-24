@@ -1,5 +1,7 @@
 package ru.job4j.list;
 
+import java.util.NoSuchElementException;
+
 public class SimpleArrayList<E> {
     private int size;
     private Node<E> first;
@@ -15,12 +17,31 @@ public class SimpleArrayList<E> {
     }
 
     /**
+     * Проверка на пустоту
+     * */
+    public boolean isEmpty() {
+        return first == null;
+    }
+
+    /**
      * Реализовать метод удаления первого элемент в списке.
      */
     public E delete() {
-        Node temp = first;
-        first = first.next;
-        return (E) temp;
+        Node<E> firstOne = first;
+
+        if (isEmpty()) {
+        throw new NoSuchElementException();
+        }
+        // Сохраняем возвращаемый результат
+        E result = firstOne.data;
+        // Сохраняем ссылку на след. Node
+        Node<E> nextLink = firstOne.next;
+
+        // Переназначаем first, След. Node
+        first = nextLink;
+
+        this.size--;
+        return result;
     }
 
     /**

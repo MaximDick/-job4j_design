@@ -2,6 +2,9 @@ package ru.job4j.list;
 
 import org.junit.Test;
 import org.junit.Before;
+
+import java.util.NoSuchElementException;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -19,7 +22,7 @@ public class SimpleArrayListTest {
 
     @Test
     public void whenAddThreeElementsThenUseGetOneResultTwo() {
-        assertThat(list.get(1), is(2));
+        assertThat(list.get(0), is(3));
     }
 
     @Test
@@ -28,9 +31,14 @@ public class SimpleArrayListTest {
     }
 
     @Test
+    (expected = NoSuchElementException.class)
     public void whenDelete() {
         list.delete();
         assertThat(list.get(0), is(2));
+        list.delete();
+        assertThat(list.get(0), is(1));
+        list.delete();
+        list.delete();
     }
 
 }

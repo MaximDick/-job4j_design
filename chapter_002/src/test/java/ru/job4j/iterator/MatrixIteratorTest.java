@@ -2,9 +2,10 @@ package ru.job4j.iterator;
 
 import org.junit.Before;
 import org.junit.Test;
-import ru.job4j.iterator.MatrixIterator;
+
 
 import java.util.Iterator;
+
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
@@ -18,7 +19,7 @@ public class MatrixIteratorTest {
     }
 
     @Test
-    public void testsThatNextMethodDoesntDependsOnPriorHasNextInvocation() {
+    public void testsThatNextMethodDoesNotDependsOnPriorHasNextInvocation() {
         assertThat(it.next(), is(1));
         assertThat(it.next(), is(3));
         assertThat(it.next(), is(4));
@@ -26,7 +27,7 @@ public class MatrixIteratorTest {
     }
 
     @Test
-    public void sequentialHasNextInvocationDoesntAffectRetrievalOrder() {
+    public void sequentialHasNextInvocationDoesNotAffectRetrievalOrder() {
         assertThat(it.hasNext(), is(true));
         assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(1));
@@ -35,7 +36,7 @@ public class MatrixIteratorTest {
         assertThat(it.next(), is(7));
     }
 
-    @Test
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void hasNextNextSequentialInvocation() {
         assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(1));

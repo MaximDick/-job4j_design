@@ -2,38 +2,31 @@ package ru.job4j.iterator;
 
 import java.util.Iterator;
 
+/**
+ * task 5.1.1. Итератор для двухмерного массива int[][][#241580].
+ * */
 public class MatrixIterator<T> implements Iterator<T> {
 
-    private int size;          //кол-во элементов в матрице
-    private int position = 0;  //номер текущего элемента для "выдачи"
+    private T[][] matrix;
     private int row = 0;       //строка текущего элемента
     private int col = 0;       //столбец текущего элемента
-    private T[][] matrix;
+
 
     public MatrixIterator(T[][] matrix) {
         this.matrix = matrix;
-        this.size = countElements(matrix);
     }
 
-    private int countElements(T[][] matrix) {  //считаем количество элементов в матрице
-        int count = 0;
-        for (T[] row : matrix) {
-            count += row.length;
-        }
-        return count;
-    }
 
     @Override
     public boolean hasNext() {
-        return position < size;
+        return this.row < this.matrix.length - 1 || this.col < matrix[row].length;
     }
 
     @Override
     public T next() {
-
-//      переходим к следующему элементу
-        position++;
-
+        if (!hasNext()) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
         T element = matrix[row][col++];
         if (col >= matrix[row].length) {
             col = 0;

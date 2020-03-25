@@ -80,7 +80,7 @@ public class SimpleLinkedList<E> implements SimpleList<E> {
     /**
      * @param indx передаваемый индекс.
      * Проверка на наличие индекса в диапазоне.*/
-    public void checkIndexIsOutOfRange(int indx) {
+    private void checkIndexIsOutOfRange(int indx) {
         if (indx < 0 || indx > getSize()) {
             throw new IndexOutOfBoundsException();
         }

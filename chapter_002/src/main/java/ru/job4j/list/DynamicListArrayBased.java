@@ -5,6 +5,9 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * task 5.3.1. Создать динамический список на базе массива.[#241571]
+ * */
 public class DynamicListArrayBased<E> implements SimpleList<E> {
 
     private Object[] array;
@@ -48,7 +51,7 @@ public class DynamicListArrayBased<E> implements SimpleList<E> {
      * при необходимости увеличивать его.
      * */
     private void checkEnsureCapacity() {
-        if (index > array.length) {
+        if (index > array.length * FILL_FACTOR) {
             this.array = Arrays.copyOf(this.array, (int) (this.index * MAGNIFICATION_FACTOR));
         }
     }
@@ -64,6 +67,17 @@ public class DynamicListArrayBased<E> implements SimpleList<E> {
         this.array[index++] = value;
     }
 
+
+    /**
+     * @param indx передаваемый индекс.
+     * Проверка на наличие индекса в диапазоне.
+     * */
+    private void checkIndexIsOutOfRange(int indx) {
+        if (indx < 0 || indx > this.index) {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
     /**
      * Возвращает элемент из хранилища.
      * @param index - индекс соответствующего элемента.
@@ -71,6 +85,7 @@ public class DynamicListArrayBased<E> implements SimpleList<E> {
      */
     @Override
     public E get(int index) {
+        checkIndexIsOutOfRange(index);
         return (E) this.array[index];
     }
 

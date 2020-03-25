@@ -1,5 +1,6 @@
 package ru.job4j.list;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ConcurrentModificationException;
@@ -10,15 +11,21 @@ import static org.junit.Assert.*;
 
 public class DynamicListArrayBasedTest {
 
+    private SimpleList<Integer> list;
+
+    @Before
+    public void beforeTest() {
+        list = new DynamicListArrayBased<>();
+        list.add(10);
+        list.add(5);
+        list.add(22);
+    }
+
     /**
      * Add element.
      * */
     @Test
     public void ifAddIntegerToTestListThenHasThisInteger() {
-        SimpleList<Integer> list = new DynamicListArrayBased<>();
-        list.add(10);
-        list.add(5);
-        list.add(22);
         assertThat(list.get(0), is(10));
         assertThat(list.get(1), is(5));
         assertThat(list.get(2), is(22));
@@ -29,17 +36,13 @@ public class DynamicListArrayBasedTest {
      * */
     @Test
     public void hasNextNextSequentialInvocation() {
-        SimpleList<Integer> list = new DynamicListArrayBased<>();
-        list.add(1);
-        list.add(9);
-        list.add(12);
         Iterator<Integer> iterator = list.iterator();
         assertThat(iterator.hasNext(), is(true));
-        assertThat(iterator.next(), is(1));
+        assertThat(iterator.next(), is(10));
         assertThat(iterator.hasNext(), is(true));
-        assertThat(iterator.next(), is(9));
+        assertThat(iterator.next(), is(5));
         assertThat(iterator.hasNext(), is(true));
-        assertThat(iterator.next(), is(12));
+        assertThat(iterator.next(), is(22));
         assertThat(iterator.hasNext(), is(false));
     }
 

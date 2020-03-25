@@ -2,6 +2,9 @@ package ru.job4j.list;
 
 import java.util.NoSuchElementException;
 
+/**
+ * task 5.3.0 Создать метод delete для односвязного списка[#241569].
+ * */
 public class SimpleArrayList<E> {
     private int size;
     private Node<E> first;

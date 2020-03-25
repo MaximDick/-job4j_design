@@ -4,6 +4,9 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * task 5.3.2. Создать контейнер на базе связанного списка [#241572].
+ * */
 public class SimpleLinkedList<E> implements SimpleList<E> {
 
     private int size;
@@ -75,11 +78,22 @@ public class SimpleLinkedList<E> implements SimpleList<E> {
     }
 
     /**
+     * @param indx передаваемый индекс.
+     * Проверка на наличие индекса в диапазоне.*/
+    public void checkIndexIsOutOfRange(int indx) {
+        if (indx < 0 || indx > getSize()) {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    /**
      * Поиск узла по индексу.
      * @param index - индекс узла.
      * @return искомый узел.
      * */
     private Node<E> findNodeByIndex(int index) {
+        checkIndexIsOutOfRange(index);
+
         int halfLinkedList = this.size / 2;
         Node<E> currentNode = this.first;
         if (index <= halfLinkedList) {
@@ -101,7 +115,7 @@ public class SimpleLinkedList<E> implements SimpleList<E> {
     public Iterator iterator() {
         return new Iterator() {
             private int nodeCount;
-            private final int expectedmodCount = modCount;
+            private final int expectedModCount = modCount;
             private Node<E> currentNode = first;
 
             /**
@@ -118,7 +132,7 @@ public class SimpleLinkedList<E> implements SimpleList<E> {
              * @return ссылку на текузий объект под указателем.*/
             @Override
             public E next() {
-                if (this.expectedmodCount != modCount) {
+                if (this.expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
                 if (this.nodeCount >= size) {

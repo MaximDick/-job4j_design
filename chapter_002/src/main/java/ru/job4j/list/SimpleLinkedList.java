@@ -86,6 +86,19 @@ public class SimpleLinkedList<E> implements Iterable<E>, SimpleList<E> {
         return result;
     }
 
+    public E deleteFirst() {
+        //isEmpty();
+        E result = first.item;
+        if (first.next == null) {
+            last = null;
+        }
+        first = first.next;
+        size--;
+        modCount++;
+        return result;
+    }
+
+
     /**
      * Возвращает ссылку на объект из хранилища по заданному индексу.
      * @param index заданный индекс.

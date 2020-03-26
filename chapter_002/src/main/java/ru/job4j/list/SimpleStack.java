@@ -14,7 +14,7 @@ public class SimpleStack<T> {
        return linked.deleteLast();
     }
 
-    protected boolean isEmpty() {
+    public boolean isEmpty() {
         return linked.getSize() == 0;
     }
 

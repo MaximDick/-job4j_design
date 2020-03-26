@@ -8,12 +8,12 @@ public class SimpleArray<T> implements Iterable<T> {
     private T[] array;
     private int size;
 
-    protected SimpleArray(int size) {
+    public SimpleArray(int size) {
         this.array = (T[]) new Object[size];
         this.size = 0;
     }
 
-    protected SimpleArray() {
+    public SimpleArray() {
         array = (T[]) new Object[10];
     }
 

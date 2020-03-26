@@ -26,7 +26,7 @@ public class SimpleLinkedList<E> implements Iterable<E>, SimpleList<E> {
      * prev - ссылка на предыдущий Node.
      * @param <E> Параметризованный тип Node.
      * */
-    public static class Node<E> {
+    private static class Node<E> {
         E item;
         Node<E> next;
         Node<E> prev;

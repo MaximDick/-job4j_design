@@ -7,12 +7,14 @@ import java.util.NoSuchElementException;
 /**
  * task 5.3.2. Создать контейнер на базе связанного списка [#241572].
  * */
-public class SimpleLinkedList<E> implements SimpleList<E> {
+public class SimpleLinkedList<E> implements Iterable<E>, SimpleList<E> {
 
     private int size;
     private Node<E> first;
     private Node<E> last;
     private int modCount;
+
+
 
     /**
      * Внутренний класс описывающий объекты Node, которые будут
@@ -66,6 +68,23 @@ public class SimpleLinkedList<E> implements SimpleList<E> {
         size++;
     }
 
+    public boolean isEmpty() {
+        return first == null;
+    }
+    public E deleteLast() {
+        isEmpty();
+        E result = this.last.item;
+        if (this.size > 1) {
+            this.last.next = null;
+            this.last = this.last.prev;
+        } else {
+            this.first = null;
+            this.last = null;
+        }
+        size--;
+        modCount++;
+        return result;
+    }
 
     /**
      * Возвращает ссылку на объект из хранилища по заданному индексу.

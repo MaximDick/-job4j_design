@@ -14,7 +14,7 @@ public class SimpleArrayList<E> {
      */
     public void add(E data) {
         Node<E> newLink = new Node(data);
-        newLink .next = this.first;
+        newLink.next = this.first;
         this.first = newLink;
         this.size++;
     }

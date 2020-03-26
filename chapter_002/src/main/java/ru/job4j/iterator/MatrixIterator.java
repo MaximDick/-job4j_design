@@ -12,7 +12,7 @@ public class MatrixIterator<T> implements Iterator<T> {
     private int col = 0;       //столбец текущего элемента
 
 
-    public MatrixIterator(T[][] matrix) {
+    protected MatrixIterator(T[][] matrix) {
         this.matrix = matrix;
     }
 

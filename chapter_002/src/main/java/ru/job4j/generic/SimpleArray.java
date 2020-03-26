@@ -8,20 +8,16 @@ public class SimpleArray<T> implements Iterable<T> {
     private T[] array;
     private int size;
 
-//   public SimpleArray(T[] model) {
-//       this.array = (T[]) new Object[size];
-//   }
-
-    public SimpleArray(int size) {
+    protected SimpleArray(int size) {
         this.array = (T[]) new Object[size];
         this.size = 0;
     }
 
-    public SimpleArray() {
+    protected SimpleArray() {
         array = (T[]) new Object[10];
     }
 
-    public void checkIndexPosition(int indx) {
+    private void checkIndexPosition(int indx) {
         if (size == 0 || indx < 0 || indx >= size) {
             throw new ArrayIndexOutOfBoundsException();
         }
@@ -34,27 +30,19 @@ public class SimpleArray<T> implements Iterable<T> {
         this.array[size++] = model;
     }
 
-    public void set(int index, T model) {
-//        if (size == 0 || index < 0 || index >= size) {
-//            throw new ArrayIndexOutOfBoundsException();
-//        }
+    protected void set(int index, T model) {
+
         checkIndexPosition(index);
         this.array[index] = model;
     }
 
-    public void remove(int index) {
-//        if (size == 0 || index < 0 || index >= size) {
-//            throw new ArrayIndexOutOfBoundsException();
-//        }
+    protected void remove(int index) {
         checkIndexPosition(index);
         this.array[size--] = null;
         System.arraycopy(array, size + 1, array, size, array.length - size - 1);
     }
 
-    public T get(int index) {
-//        if (size == 0 || index < 0 || index >= size) {
-//            throw new ArrayIndexOutOfBoundsException();
-//        }
+    protected T get(int index) {
         checkIndexPosition(index);
         return this.array[index];
     }

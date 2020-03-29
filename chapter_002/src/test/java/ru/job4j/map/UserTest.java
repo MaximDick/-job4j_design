@@ -13,6 +13,7 @@ import static org.hamcrest.Matchers.is;
 /**
  * task 2. Не перекрывать equals hashCode[#241593].
  * task 3. Переопределить только hashCode().[#241591].
+ * task 4. Переопределить только equals[#241592]
  * */
 public class UserTest {
 
@@ -90,5 +91,33 @@ public class UserTest {
         map.put(user2, user2.getName());
         System.out.println(map);
     }
+
+    /**
+     * В случае, если hashCode() не переопределен, то будет выполнятся его реализация по умолчанию из класса Object:
+     *  - для разных обектов будет разный хеш-код.
+     * Хеш-код это число, в нашем случае идентифицирующее обьект,
+     * поэтому при вычислении хеш-кода следует выбирать уникальные
+     * и не изменяющиеся во время жизни обьекта поля.
+     *
+     * equals переопределен, а hashCode непереопределен.
+     * Здесь зависит того как генерируется значение для hashCode в классе Object.
+     * Если значения будут одинаковы, то список будет один и тот же, и соответсвенно,
+     * количество элементов в таблице будет 1.
+     * Если разные,то поиск будет происходить в разных списках,
+     * и дубликатов не обнаружится, тогда размер будет равен 2.
+     *
+     * {ru.job4j.map.User@721e0f4f=Vladimir, ru.job4j.map.User@28864e92=Vladimir}*/
+    @Test
+    public void whenRedefinedEqualsButNotRedefinedHashCode() {
+        User user1 = new User("Vladimir", 1, new GregorianCalendar(1994, 1, 27));
+        User user2 = new User("Vladimir", 1, new GregorianCalendar(1994, 1, 27));
+        Map<User, Object> map = new HashMap<>();
+        map.put(user1, user1.getName());
+        map.put(user2, user2.getName());
+        assertThat(map.size(), is(2));
+        System.out.println(map);
+    }
+
+
 
 }

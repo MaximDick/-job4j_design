@@ -14,6 +14,7 @@ import static org.hamcrest.Matchers.is;
  * task 2. Не перекрывать equals hashCode[#241593].
  * task 3. Переопределить только hashCode().[#241591].
  * task 4. Переопределить только equals[#241592]
+ * task  5. Перекрывать и equals и hashCode[#241590]
  * */
 public class UserTest {
 
@@ -49,15 +50,15 @@ public class UserTest {
      * 4.если хеш-коды разные, то и объекты гарантированно разные.
      *
      * */
-    @Test
-    public void whenUsersAreNotEqualByTheStandardMethod() {
-        User user1 = new User("Vladimir", 1, new GregorianCalendar(1994, 1, 27));
-        User user2 = new User("Vladimir", 1, new GregorianCalendar(1994, 1, 27));
-        Map<User, Object> map = new HashMap<>();
-        map.put(user1, user1.getName());
-        map.put(user2, user2.getName());
-        assertThat(user1.equals(user2), is(false));
-    }
+//    @Test
+//    public void whenUsersAreNotEqualByTheStandardMethod() {
+//        User user1 = new User("Vladimir", 1, new GregorianCalendar(1994, 1, 27));
+//        User user2 = new User("Vladimir", 1, new GregorianCalendar(1994, 1, 27));
+//        Map<User, Object> map = new HashMap<>();
+//        map.put(user1, user1.getName());
+//        map.put(user2, user2.getName());
+//        assertThat(user1.equals(user2), is(false));
+//    }
 
     /**
      * HashMap - состоит из массива, в каждой ячейке которого хранится список элементов
@@ -68,29 +69,29 @@ public class UserTest {
      * Method HashCode() redefined, but method equal() not redefined: В этом случае, индекс ячейки будет одним и тем же,
      * но в списке не обнаружится одинакового элемента и по этому размер будет равен 2.
      * */
-    @Test
-    public void whenRedefinedHashCodeEqualsNotRedefined() {
-        User user1 = new User("Vladimir", 1, new GregorianCalendar(1994, 1, 27));
-        User user2 = new User("Vladimir", 1, new GregorianCalendar(1994, 1, 27));
-        Map<User, Object> map = new HashMap<>();
-        map.put(user1, user1.getName());
-        map.put(user2, user2.getName());
-        assertThat(map.size(), is(2));
-    }
+//    @Test
+//    public void whenRedefinedHashCodeEqualsNotRedefined() {
+//        User user1 = new User("Vladimir", 1, new GregorianCalendar(1994, 1, 27));
+//        User user2 = new User("Vladimir", 1, new GregorianCalendar(1994, 1, 27));
+//        Map<User, Object> map = new HashMap<>();
+//        map.put(user1, user1.getName());
+//        map.put(user2, user2.getName());
+//        assertThat(map.size(), is(2));
+//    }
 
     /**
      * Печать с переопределенным методом hashCode().
      * {ru.job4j.map.User@ca1c00d6=Vladimir, ru.job4j.map.User@ca1c00d6=Vladimir}
      * */
-    @Test
-    public void whenOverrideHashCodeEqualsNotOverrideOutputInDisplay() {
-        User user1 = new User("Vladimir", 1, new GregorianCalendar(1994, 1, 27));
-        User user2 = new User("Vladimir", 1, new GregorianCalendar(1994, 1, 27));
-        Map<User, Object> map = new HashMap<>();
-        map.put(user1, user1.getName());
-        map.put(user2, user2.getName());
-        System.out.println(map);
-    }
+//    @Test
+//    public void whenOverrideHashCodeEqualsNotOverrideOutputInDisplay() {
+//        User user1 = new User("Vladimir", 1, new GregorianCalendar(1994, 1, 27));
+//        User user2 = new User("Vladimir", 1, new GregorianCalendar(1994, 1, 27));
+//        Map<User, Object> map = new HashMap<>();
+//        map.put(user1, user1.getName());
+//        map.put(user2, user2.getName());
+//        System.out.println(map);
+//    }
 
     /**
      * В случае, если hashCode() не переопределен, то будет выполнятся его реализация по умолчанию из класса Object:
@@ -107,14 +108,32 @@ public class UserTest {
      * и дубликатов не обнаружится, тогда размер будет равен 2.
      *
      * {ru.job4j.map.User@721e0f4f=Vladimir, ru.job4j.map.User@28864e92=Vladimir}*/
+//    @Test
+//    public void whenRedefinedEqualsButNotRedefinedHashCode() {
+//        User user1 = new User("Vladimir", 1, new GregorianCalendar(1994, 1, 27));
+//        User user2 = new User("Vladimir", 1, new GregorianCalendar(1994, 1, 27));
+//        Map<User, Object> map = new HashMap<>();
+//        map.put(user1, user1.getName());
+//        map.put(user2, user2.getName());
+//        assertThat(map.size(), is(2));
+//        System.out.println(map);
+//    }
+
+    /**
+     * equals и hashCode переопределены, тогда у нас будет одинаковое хэш значение,
+     * мы попадем в одну и туже ячейку таблицы, equals определит, что объект в списке уже присутствует,
+     * соответственно размер будет равен 1.
+     *
+     * {ru.job4j.map.User@ca1c00d6=Vladimir}
+     * */
     @Test
-    public void whenRedefinedEqualsButNotRedefinedHashCode() {
+    public void whenRedefinedEqualsAndNotRedefinedHashCode() {
         User user1 = new User("Vladimir", 1, new GregorianCalendar(1994, 1, 27));
         User user2 = new User("Vladimir", 1, new GregorianCalendar(1994, 1, 27));
         Map<User, Object> map = new HashMap<>();
         map.put(user1, user1.getName());
         map.put(user2, user2.getName());
-        assertThat(map.size(), is(2));
+        assertThat(map.size(), is(1));
         System.out.println(map);
     }
 

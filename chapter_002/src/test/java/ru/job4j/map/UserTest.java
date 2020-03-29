@@ -12,6 +12,7 @@ import static org.hamcrest.Matchers.is;
 
 /**
  * task 2. Не перекрывать equals hashCode[#241593].
+ * task 3. Переопределить только hashCode().[#241591].
  * */
 public class UserTest {
 
@@ -55,6 +56,39 @@ public class UserTest {
         map.put(user1, user1.getName());
         map.put(user2, user2.getName());
         assertThat(user1.equals(user2), is(false));
+    }
+
+    /**
+     * HashMap - состоит из массива, в каждой ячейке которого хранится список элементов
+     * Когда добавляем новый элемент , для него вычисляется хэшкод,
+     * затем определяется индекс ячейки, где должен храниться список, содержащий данный элемент.
+     * index = hashCode(key) % table_size, где table_size - размер таблицы.
+     *
+     * Method HashCode() redefined, but method equal() not redefined: В этом случае, индекс ячейки будет одним и тем же,
+     * но в списке не обнаружится одинакового элемента и по этому размер будет равен 2.
+     * */
+    @Test
+    public void whenRedefinedHashCodeEqualsNotRedefined() {
+        User user1 = new User("Vladimir", 1, new GregorianCalendar(1994, 1, 27));
+        User user2 = new User("Vladimir", 1, new GregorianCalendar(1994, 1, 27));
+        Map<User, Object> map = new HashMap<>();
+        map.put(user1, user1.getName());
+        map.put(user2, user2.getName());
+        assertThat(map.size(), is(2));
+    }
+
+    /**
+     * Печать с переопределенным методом hashCode().
+     * {ru.job4j.map.User@ca1c00d6=Vladimir, ru.job4j.map.User@ca1c00d6=Vladimir}
+     * */
+    @Test
+    public void whenOverrideHashCodeEqualsNotOverrideOutputInDisplay() {
+        User user1 = new User("Vladimir", 1, new GregorianCalendar(1994, 1, 27));
+        User user2 = new User("Vladimir", 1, new GregorianCalendar(1994, 1, 27));
+        Map<User, Object> map = new HashMap<>();
+        map.put(user1, user1.getName());
+        map.put(user2, user2.getName());
+        System.out.println(map);
     }
 
 }

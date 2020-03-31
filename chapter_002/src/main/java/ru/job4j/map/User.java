@@ -19,6 +19,10 @@ public class User {
         return name;
     }
 
+    public int getChildren() {
+        return children;
+    }
+
     public Calendar getBirthday() {
         return birthday;
     }

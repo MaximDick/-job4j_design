@@ -24,20 +24,35 @@ public class SimpleSet<E> implements Iterable<E> {
     /**
      * Добавляет элемент в хранилище.
      * Проверяет чтоб хранились уникальные значения.
-     * @param element  добавляемый элемент в хранилище.
+     * @param value  добавляемый элемент в хранилище.
      * @return true - если добавление успешно,
      *         false - добавление не произошло.
      **/
-    public boolean add(E element) {
-        for (E elem : this.store) {
-            if (elem.equals(element)) {
-                return false;
-            }
+    public boolean add(E value) {
+        if (!contains(value)) {
+            this.store.add(value);
+            return true;
         }
-        this.store.add(element);
-        return true;
+        return false;
     }
 
+    /**
+     * Проверяет наличие заданного значения в массиве.
+     *
+     * @param value искомое значение.
+     * @retur result true - если присутствует,
+     *               false - если такого значения нет.
+     **/
+    public boolean contains(E value) {
+        boolean result = false;
+        for (E elem : this.store) {
+            if (elem.equals(value)) {
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
 
     @Override
     public Iterator<E> iterator() {

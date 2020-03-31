@@ -5,33 +5,29 @@ public class CheckLinkedListCycles {
 
     /**
      * @param first первый узел списка.
-     * @return true - если список содержит замыкание, иначе false. */
+     * @return true - если список содержит замыкание, иначе false.
+     */
     public <T> boolean hasCycle(Node<T> first) {
 
-        if (first == null) {
-            return false; // список не существует, то и петли не будет
-        }
+        boolean result = false;
+        if (first != null) {
 
-        Node<T> slow, fast; // создание ссылок
-        slow = first;
-        fast = first;
+            Node<T> slow = first; // создание ссылок
+            Node<T> fast = first;
 
-        while (true) {
-            slow = slow.next; //1 step
+            while (!result && slow.getNext() != null
+                    && fast.getNext() != null && fast.getNext().getNext() != null) {
 
-            if (fast.next != null) {
-                fast = fast.next.next; //2 steps
-            } else {
-                return false;
-            }
+                slow = slow.getNext(); //1 step
 
-            if (slow == null || fast == null) {
-                return false; // если хотя бы один == null, то нет петли
-            }
+                fast = fast.getNext().getNext(); //2 steps
 
-            if (slow == fast) {
-                return true; // если встретились. то имеем петлю
+
+                if (slow.equals(fast)) {
+                    return true; // если встретились. то имеем петлю
+                }
             }
         }
+        return result;
     }
 }

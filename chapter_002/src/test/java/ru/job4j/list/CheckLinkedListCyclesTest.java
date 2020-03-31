@@ -14,14 +14,14 @@ public class CheckLinkedListCyclesTest {
     private Node<Integer> first;
     private Node<Integer> second;
     private Node<Integer> third;
-    private Node<Integer> fouth;
+    private Node<Integer> fourth;
 
     @Before
     public void setUp() {
         first = new Node<>(1);
         second = new Node<>(2);
         third = new Node<>(3);
-        fouth = new Node<>(4);
+        fourth = new Node<>(4);
     }
 
     /**
@@ -31,8 +31,8 @@ public class CheckLinkedListCyclesTest {
     public void isListHasCycle() {
         first.setNext(second);
         second.setNext(third);
-        third.setNext(fouth);
-        fouth.setNext(first);
+        third.setNext(fourth);
+        fourth.setNext(first);
         assertThat(new CheckLinkedListCycles().hasCycle(first), is(true));
     }
 
@@ -43,8 +43,8 @@ public class CheckLinkedListCyclesTest {
     public void isListHasNotCycle() {
         first.setNext(second);
         second.setNext(third);
-        third.setNext(fouth);
-        fouth.setNext(null);
+        third.setNext(fourth);
+        fourth.setNext(null);
         assertThat(new CheckLinkedListCycles().hasCycle(first), is(false));
     }
 
@@ -56,7 +56,7 @@ public class CheckLinkedListCyclesTest {
         first.setNext(second);
         second.setNext(third);
         third.setNext(second);
-        fouth.setNext(null);
+        fourth.setNext(null);
         assertThat(new CheckLinkedListCycles().hasCycle(first), is(true));
     }
 }

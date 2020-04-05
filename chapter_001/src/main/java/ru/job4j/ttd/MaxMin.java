@@ -23,6 +23,8 @@ public class MaxMin {
         return result;
     }
 
+
+
     public <T> T max(List<T> values, Comparator<T> comp) {
         return find(values, (x, y) -> comp.compare(x, y) > 0);
     }

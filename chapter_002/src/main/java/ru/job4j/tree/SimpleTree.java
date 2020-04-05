@@ -8,18 +8,15 @@ import java.util.Optional;
  * task 1. Создать элементарную структуру дерева[#241600]
  */
 
-public interface SimpleTree<E> {
+public interface SimpleTree<E extends Comparable<E>> extends Iterable<E> {
 
     boolean add(E parent, E child);
 
     Optional<Node<E>> findBy(E value);
 
-    class Node<E> {
-        final E value;
-        final List<Node<E>> children = new ArrayList<>();
 
-        public Node(E value) {
-            this.value = value;
-        }
-    }
+
+//    class Node<E> {
+//
+//    }
 }

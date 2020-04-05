@@ -25,6 +25,7 @@ public class SimpleSetTest {
         boolean firstRsl = set.add(1);
         boolean secondRsl = set.add(1);
         set.add(1);
+        set.add(1);
         set.add(2);
         Iterator<Integer> testIterator = set.iterator();
         assertThat(firstRsl, is(true));

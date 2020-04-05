@@ -29,7 +29,8 @@ public class SimpleSet<E> implements Iterable<E> {
      *         false - добавление не произошло.
      **/
     public boolean add(E value) {
-        if (!contains(value)) {
+        boolean rsl = contains(value);
+        if (!rsl) {
             this.store.add(value);
             return true;
         }

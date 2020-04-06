@@ -6,7 +6,7 @@ import java.io.FileInputStream;
 /**
  * 0. Read file[#241611]
  * */
-public class ReadFile {
+public class EvenNumberFile {
     public static void main(String[] args) {
         FileInputStream in = null;
         /**

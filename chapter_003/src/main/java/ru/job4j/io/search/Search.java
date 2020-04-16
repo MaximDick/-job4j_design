@@ -12,7 +12,8 @@ import java.util.List;
 import static java.nio.file.FileVisitResult.CONTINUE;
 
 /**
- * task 3. Сканирование файловой системы.[#241605]*/
+ * task 3. Сканирование файловой системы.[#241605]
+ * */
 public class Search {
     public static void main(String[] args) throws IOException {
         Path start = Paths.get(".");
@@ -33,4 +34,5 @@ public class Search {
         });
         return result;
     }
+
 }

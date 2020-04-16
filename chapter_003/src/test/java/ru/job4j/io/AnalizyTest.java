@@ -16,18 +16,12 @@ import static org.hamcrest.Matchers.is;
 
 
 public class AnalizyTest {
-    private Analizy analizy;
-
     @Rule
     public TemporaryFolder folder = new TemporaryFolder();
 
-    @Before
-    public void init() {
-        analizy = new Analizy();
-    }
-
     @Test
     public void whenServerUnavailable() {
+        Analizy analizy = new Analizy();
         String source = "./data/server.log";
         String target = "./data/unavailable.csv";
         analizy.unavailable(source, target);

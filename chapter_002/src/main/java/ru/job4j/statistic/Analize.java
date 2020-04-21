@@ -31,6 +31,7 @@ public class Analize {
 
         for (User user : previous) {
             if (actual.containsKey(user.id) & !actual.containsValue(user)) {
+//            if (!actual.get(user.id).equals(user)) {
                 changed++;
             } else if (!actual.containsKey(user.id)) {
                 deleted++;

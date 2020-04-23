@@ -21,7 +21,7 @@ public class ArgZip {
         boolean rsl = true;
         if (this.arguments.length != 6) {
             rsl = false;
-            System.out.println("args doesn't contains enough \\\"Arguments\\");
+            System.out.println("args doesn't contains enough \\\"Args\\");
         }
         return rsl;
     }

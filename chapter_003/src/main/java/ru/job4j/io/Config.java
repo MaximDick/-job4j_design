@@ -22,17 +22,14 @@ public class Config {
     public void load() {
         this.values.clear();
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
-            read.lines().forEach(
-                    line -> {
-                        if (line.contains(FLAG)) {
-                            int position = line.indexOf(FLAG);
-                            values.put(line.substring(0, position), line.substring(position + 1));
-                        } else {
-                            values.put(line, "");
+            read.lines()
+                    .map(String::trim)
+                    .filter(line -> !line.isEmpty() && line.charAt(0) != '#' && line.indexOf('=') != -1)
+                    .forEach(line -> {
+                        int index = line.indexOf('=');
+                        values.put(line.substring(0, index), line.substring(index + 1));
                         }
-
-                    }
-            );
+                    );
         } catch (IOException e) {
             e.printStackTrace();
         }

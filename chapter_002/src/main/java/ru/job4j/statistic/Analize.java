@@ -30,8 +30,7 @@ public class Analize {
                 .collect(Collectors.toMap(User::getId, u -> u));
 
         for (User user : previous) {
-            if (actual.containsKey(user.id) & !actual.containsValue(user)) {
-//            if (!actual.get(user.id).equals(user)) {
+            if (actual.containsKey(user.id) & !actual.get(user.id).equals(user)) {
                 changed++;
             } else if (!actual.containsKey(user.id)) {
                 deleted++;
@@ -81,6 +80,11 @@ public class Analize {
             int result = Integer.hashCode(id);
             result = 31 * result + this.name.hashCode();
             return result;
+        }
+
+        @Override
+        public String toString() {
+            return "User{" + "id=" + id + ", name='" + name + '\'' + '}';
         }
     }
 

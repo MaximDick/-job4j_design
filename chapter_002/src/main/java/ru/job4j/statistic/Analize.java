@@ -30,7 +30,7 @@ public class Analize {
                 .collect(Collectors.toMap(User::getId, u -> u));
 
         for (User user : previous) {
-            if (actual.containsKey(user.id) & !actual.get(user.id).equals(user)) {
+            if (actual.containsKey(user.id) && !actual.get(user.id).equals(user)) {
                 changed++;
             } else if (!actual.containsKey(user.id)) {
                 deleted++;

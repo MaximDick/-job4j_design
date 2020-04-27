@@ -1,6 +1,5 @@
 package ru.job4j.io;
 
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -9,8 +8,6 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Scanner;
-import static junit.framework.TestCase.assertEquals;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
@@ -20,19 +17,14 @@ public class AnalizyTest {
     public TemporaryFolder folder = new TemporaryFolder();
 
     @Test
-    public void whenServerUnavailable() {
+    public void whenServerUnavailable()  throws IOException {
         Analizy analizy = new Analizy();
         String source = "./data/server.log";
         String target = "./data/unavailable.csv";
         analizy.unavailable(source, target);
-        try (Scanner scanner = new Scanner(new File(target))) {
-            while (scanner.hasNext()) {
-                assertEquals(scanner.nextLine(), "10:57:01-10:59:01;");
-                assertEquals(scanner.nextLine(), "11:01:02-11:02:02;");
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        List<String> actual = Files.readAllLines(Paths.get(target));
+        List<String> expected = List.of("10:57:01-10:59:01;", "11:01:02-11:02:02;");
+         assertThat(actual, is(expected));
     }
 
     @Test

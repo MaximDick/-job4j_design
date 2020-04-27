@@ -1,5 +1,7 @@
 package ru.job4j.io.chat;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.io.*;
 import java.util.LinkedList;
@@ -79,7 +81,8 @@ public class ConsoleChat {
    }
 
     public static void main(String[] args) {
-        String path = "C:\\projects\\job4j_design\\chapter_003\\src\\main\\java\\ru\\job4j\\io\\chat\\dictionary.txt";
+        String path = "C:\\projects\\job4j_design\\dictionary.txt";
+       // System.out.println(myFile.getCanonicalPath());
         System.out.println(path);
         String target =  System.getProperty("java.io.tmpdir") + System.getProperty("file.separator") + "chat.log";
         ConsoleChat chat = new ConsoleChat(path, System.in);

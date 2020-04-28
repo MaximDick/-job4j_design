@@ -9,7 +9,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class ArgZipTest {
-    private ArgZip arg = new ArgZip(new String[]{"-d", "c:\\project\\job4j_design\\", "-e", "*.java", "-o", "project.zip"});
+    private ArgZip arg = new ArgZip(new String[]{"-d", "c:\\project\\job4j_design\\", "-e", ".java", "-o", "project.zip"});
 
     @Test
     public void valid() {
@@ -18,7 +18,7 @@ public class ArgZipTest {
 
     @Test
     public void validFalse() {
-        this.arg = new ArgZip(new String[]{"-d", "c:\\project\\job4j\\", "-e", "*.java", "-o"});
+        this.arg = new ArgZip(new String[]{"-d", "c:\\project\\job4j\\", "-e", ".java", "-o"});
         assertFalse(this.arg.valid());
     }
 
@@ -29,7 +29,7 @@ public class ArgZipTest {
 
     @Test
     public void exclude() {
-        assertThat(this.arg.exclude(), is("*.java"));
+        assertThat(this.arg.exclude(), is(".java"));
     }
 
     @Test

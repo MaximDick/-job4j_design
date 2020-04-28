@@ -18,6 +18,8 @@ public class Search {
     public static void main(String[] args) throws IOException {
         Path start = Paths.get(".");
         Files.walkFileTree(start, new PrintFiles());
+        List<String> ls = search(start, "txt");
+        System.out.println(ls);
     }
 
     public static List<String> search(Path root, String ext) throws IOException {

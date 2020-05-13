@@ -10,6 +10,6 @@ public interface Store {
     boolean replace(String id, Item item);
     boolean delete(String id);
     List<Item> findAll();
-    List<Item> findName(String key);
+    List<Item> findByName(String key);
     Item findById(String id);
 }

@@ -8,15 +8,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class SqlTracker  implements Store, AutoCloseable {
-    private Connection cn = null;
+public class TrackerSQL implements Store, AutoCloseable {
+    private  Connection cn;
+
+    public TrackerSQL(Connection cn) {
+        this.cn = cn;
+    }
 
     public void init() {
-        try (InputStream in = SqlTracker.class.getClassLoader().getResourceAsStream("app.properties")) {
+        try (InputStream in = TrackerSQL.class.getClassLoader().getResourceAsStream("app.properties")) {
             Properties config = new Properties();
             config.load(in);
             Class.forName(config.getProperty("driver-class-name"));
-            cn = DriverManager.getConnection(
+            this.cn = DriverManager.getConnection(
                     config.getProperty("url"),
                     config.getProperty("username"),
                     config.getProperty("password")
@@ -91,7 +95,7 @@ public class SqlTracker  implements Store, AutoCloseable {
     }
 
     @Override
-    public List<Item> findName(String key) {
+    public List<Item> findByName(String key) {
         List<Item> items = new ArrayList<>();
         try (PreparedStatement stat = cn.prepareStatement("SELECT * FROM items WHERE name = ?")) {
             stat.setString(2, key);

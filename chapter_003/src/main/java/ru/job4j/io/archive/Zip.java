@@ -63,11 +63,12 @@ public class Zip {
             File el = data.poll();
             if (!el.isDirectory()) {
                 String name = el.getName();
-                if (name.contains(".")) {
-                    if (!exts.contains(name.substring(name.indexOf(".")))) {
+//                if (name.contains(".")) {
+//                    if (!exts.contains(name.substring(name.indexOf(".")))) {
+                if (!name.endsWith(exts)) {
                         rsl.add(el);
                     }
-                }
+
             } else {
                 for (File child : el.listFiles()) {
                     data.offer(child);

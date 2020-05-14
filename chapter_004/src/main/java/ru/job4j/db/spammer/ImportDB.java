@@ -35,15 +35,17 @@ public class ImportDB {
                 cfg.getProperty("jdbc.username"),
                 cfg.getProperty("jdbc.password")
         )) {
-            for (User user : users) {
-                try (PreparedStatement ps = cnt.prepareStatement("INSERT INTO users (name, email) VALUES (?, ?)")) {
+            cnt.setAutoCommit(false);
+            try (PreparedStatement ps = cnt.prepareStatement("INSERT INTO users (name, email) VALUES (?, ?)")) {
+                for (User user : users) {
                     ps.setString(1, user.name);
                     ps.setString(2, user.email);
                     ps.execute();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
+                    ps.addBatch();
                     }
-
+                ps.executeBatch();
+                cnt.commit();
+                cnt.setAutoCommit(true);
                 }
             } catch (SQLException e) {
             e.printStackTrace();

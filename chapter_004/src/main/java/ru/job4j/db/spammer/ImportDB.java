@@ -1,10 +1,7 @@
 package ru.job4j.db.spammer;
 
 import java.io.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -41,7 +38,7 @@ public class ImportDB {
             for (User user : users) {
                 try (PreparedStatement ps = cnt.prepareStatement("INSERT INTO users (name, email) VALUES (?, ?)")) {
                     ps.setString(1, user.name);
-                    ps.setString(1, user.email);
+                    ps.setString(2, user.email);
                     ps.execute();
                     } catch (SQLException e) {
                         e.printStackTrace();

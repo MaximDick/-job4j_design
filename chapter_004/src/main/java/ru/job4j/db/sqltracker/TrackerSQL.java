@@ -41,7 +41,7 @@ public class TrackerSQL implements Store, AutoCloseable {
 
     @Override
     public Item add(Item item) {
-        try (PreparedStatement stat = cn.prepareStatement("INSERT INTO items (name, description) VALUES(?, ?)")) {
+        try (PreparedStatement stat = cn.prepareStatement("INSERT INTO items (name, description) VALUES(?, ?)", Statement.RETURN_GENERATED_KEYS)) {
                 stat.setString(1, item.getName());
                 stat.setString(2, item.getDescription());
             } catch (SQLException e) {
@@ -81,13 +81,14 @@ public class TrackerSQL implements Store, AutoCloseable {
     @Override
     public List<Item> findAll() {
         List<Item> items = new ArrayList<>();
-        try  (PreparedStatement stat = cn.prepareStatement("SELECT * FROM items ");
-            ResultSet rsl = stat.executeQuery()) {
-            while (rsl.next()) {
-                String name = rsl.getString(2);
-                String desc = rsl.getString(3);
-                items.add(new Item(name, desc));
-            }
+        try  (PreparedStatement stat = cn.prepareStatement("SELECT * FROM items ", Statement.RETURN_GENERATED_KEYS)) {
+           try (ResultSet rsl = stat.executeQuery()) {
+               while (rsl.next()) {
+                   String name = rsl.getString(2);
+                   String desc = rsl.getString(3);
+                   items.add(new Item(name, desc));
+               }
+           }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -97,7 +98,7 @@ public class TrackerSQL implements Store, AutoCloseable {
     @Override
     public List<Item> findByName(String key) {
         List<Item> items = new ArrayList<>();
-        try (PreparedStatement stat = cn.prepareStatement("SELECT * FROM items WHERE name = ?")) {
+        try (PreparedStatement stat = cn.prepareStatement("SELECT * FROM items WHERE name = ?", Statement.RETURN_GENERATED_KEYS)) {
             stat.setString(2, key);
             try (ResultSet rsl = stat.executeQuery()) {
                 while (rsl.next()) {
@@ -114,7 +115,7 @@ public class TrackerSQL implements Store, AutoCloseable {
 
     @Override
     public Item findById(String id) {
-        try (PreparedStatement stat = cn.prepareStatement("SELECT * FROM items WHERE id = ?")) {
+        try (PreparedStatement stat = cn.prepareStatement("SELECT * FROM items WHERE id = ?", Statement.RETURN_GENERATED_KEYS)) {
             stat.setInt(1, Integer.parseInt(id));
             try (ResultSet rsl = stat.executeQuery()) {
                 while (rsl.next()) {

@@ -41,12 +41,19 @@ public class TrackerSQL implements Store, AutoCloseable {
 
     @Override
     public Item add(Item item) {
+        String id = null;
         try (PreparedStatement stat = cn.prepareStatement("INSERT INTO items (name, description) VALUES(?, ?)", Statement.RETURN_GENERATED_KEYS)) {
                 stat.setString(1, item.getName());
                 stat.setString(2, item.getDescription());
+                stat.executeUpdate();
+                ResultSet resultSet = stat.getGeneratedKeys();
+                if (resultSet.next()) {
+                    id = resultSet.getString(1);
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        item.setId(id);
         return item;
     }
 
